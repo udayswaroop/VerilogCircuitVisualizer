@@ -12,6 +12,121 @@ import {
   CircuitContainer 
 } from './styled-components/AppStyles';
 
+
+const vda = {
+  devices: {
+    dev0: {
+      type: "NumEntry",
+      label: "addr",
+      net: "addr",
+      order: 0,
+      bits: 5
+    },
+    dev1: {
+      type: "NumDisplay",
+      label: "data",
+      net: "data",
+      order: 1,
+      bits: 4
+    },
+    dev2: {
+      label: "mem",
+      type: "Memory",
+      bits: 4,
+      abits: 5,
+      words: 16,
+      offset: 0,
+      rdports: [
+        {}
+      ],
+      wrports: [],
+      memdata: [
+        "0000",
+        "0001",
+        "0010",
+        "0011",
+        "0100",
+        "0101",
+        "0110",
+        "0111",
+        "1000",
+        "1001",
+        "1010",
+        "1011",
+        "1100",
+        "1101",
+        "1110",
+        "1111"
+      ]
+    }
+  },
+  connectors: [
+    {
+      to: {
+        id: "dev2",
+        port: "rd0addr"
+      },
+      from: {
+        id: "dev0",
+        port: "out"
+      },
+      name: "addr"
+    },
+    {
+      to: {
+        id: "dev1",
+        port: "in"
+      },
+      from: {
+        id: "dev2",
+        port: "rd0data"
+      },
+      name: "data"
+    }
+  ],
+  subcircuits: {}
+}
+
+const vda2 = {
+  "devices": {
+      "dev0": {
+          "type": "Button",
+          "net": "d",
+          "order": 0,
+          "bits": 1,
+          "label": "d"
+      },
+      "dev1": {
+          "type": "Button",
+          "net": "c",
+          "order": 1,
+          "bits": 1,
+          "label": "c"
+      },
+      "dev2": {
+          "type": "Lamp",
+          "net": "o",
+          "order": 2,
+          "bits": 1,
+          "label": "o"
+      },
+      "dev3": {
+          "label":"$auto$proc_dlatch.cc:409:proc_dlatch$15",
+          "type":"Dff",
+          "bits":1,
+          "polarity": {"enable":true}
+      }
+  },
+  "connectors": [
+      {"to":{"id":"dev3","port":"in"},"from":{"id":"dev0","port":"out"},"name":"d"},
+      {"to":{"id":"dev3","port":"en"},"from":{"id":"dev1","port":"out"},"name":"c"},
+      {"to":{"id":"dev2","port":"in"},"from":{"id":"dev3","port":"out"},"name":"o"}
+  ],
+  "subcircuits": {}
+}
+
+
+
 const defaultCircuitConfig = {
   devices: {
     dev0: {
@@ -99,7 +214,7 @@ const defaultCircuitConfig = {
 
 function App() {
   const [theme, setTheme] = useState('light');
-  const [circuitConfig, setCircuitConfig] = useState(defaultCircuitConfig);
+  const [circuitConfig, setCircuitConfig] = useState(vda2);
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];

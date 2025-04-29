@@ -3,6 +3,7 @@ import $ from 'jquery'; // Required for digitaljs
 
 // SimpleRAM component that accepts circuit configuration as props
 const SimpleRAM = ({ initialCircuitConfig, title = "Simple RAM" }) => {
+  console.log(initialCircuitConfig);
   const paperRef = useRef(null);
   const monitorRef = useRef(null);
   const iopanelRef = useRef(null);

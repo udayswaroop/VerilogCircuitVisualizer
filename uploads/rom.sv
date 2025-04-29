@@ -1,11 +1,8 @@
-// Simple RAM
-module ram
+// Simple asynchronous ROM
+module rom
 #(parameter AWIDTH = 4, DWIDTH = 4)(
-  input clk,
   input [AWIDTH-1:0] addr,
-  output [DWIDTH-1:0] data,
-  input [AWIDTH-1:0] wraddr,
-  input [DWIDTH-1:0] wrdata
+  output [DWIDTH-1:0] data
 );
 
   integer i;
@@ -17,7 +14,5 @@ module ram
   end
 
   assign data = mem[addr];
-
-  always_ff @(posedge clk) mem[wraddr] <= wrdata;
 
 endmodule

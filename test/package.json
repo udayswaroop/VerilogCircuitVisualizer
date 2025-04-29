@@ -1,0 +1,13 @@
+{
+  "name": "verilog-circuit-visualizer-test",
+  "version": "1.0.0",
+  "description": "Test script for Verilog Circuit Visualizer",
+  "main": "test_server.js",
+  "scripts": {
+    "test": "node test_server.js"
+  },
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.7"
+  }
+} 
