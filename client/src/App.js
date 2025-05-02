@@ -13,208 +13,1314 @@ import {
 } from './styled-components/AppStyles';
 
 
-const vda = {
-  devices: {
-    dev0: {
-      type: "NumEntry",
-      label: "addr",
-      net: "addr",
-      order: 0,
-      bits: 5
-    },
-    dev1: {
-      type: "NumDisplay",
-      label: "data",
-      net: "data",
-      order: 1,
-      bits: 4
-    },
-    dev2: {
-      label: "mem",
-      type: "Memory",
-      bits: 4,
-      abits: 5,
-      words: 16,
-      offset: 0,
-      rdports: [
-        {}
-      ],
-      wrports: [],
-      memdata: [
-        "0000",
-        "0001",
-        "0010",
-        "0011",
-        "0100",
-        "0101",
-        "0110",
-        "0111",
-        "1000",
-        "1001",
-        "1010",
-        "1011",
-        "1100",
-        "1101",
-        "1110",
-        "1111"
-      ]
-    }
-  },
-  connectors: [
-    {
-      to: {
-        id: "dev2",
-        port: "rd0addr"
-      },
-      from: {
-        id: "dev0",
-        port: "out"
-      },
-      name: "addr"
-    },
-    {
-      to: {
-        id: "dev1",
-        port: "in"
-      },
-      from: {
-        id: "dev2",
-        port: "rd0data"
-      },
-      name: "data"
-    }
-  ],
-  subcircuits: {}
-}
+// const ramjson = {
+//   "devices": {
+//     "dev0": {
+//       "type": "NumEntry",
+//       "label": "a",
+//       "net": "a",
+//       "order": 0,
+//       "bits": 4
+//     },
+//     "dev1": {
+//       "type": "NumEntry",
+//       "label": "b",
+//       "net": "b",
+//       "order": 1,
+//       "bits": 4
+//     },
+//     "dev2": {
+//       "type": "NumDisplay",
+//       "label": "o",
+//       "net": "o",
+//       "order": 2,
+//       "bits": 5
+//     },
+//     "dev3": {
+//       "label": "$genblock$tests/serialadder.sv:47$4[0].\\fa",
+//       "type": "Subcircuit",
+//       "celltype": "fulladder"
+//     },
+//     "dev4": {
+//       "label": "$genblock$tests/serialadder.sv:47$5[1].\\fa",
+//       "type": "Subcircuit",
+//       "celltype": "fulladder"
+//     },
+//     "dev5": {
+//       "label": "$genblock$tests/serialadder.sv:47$6[2].\\fa",
+//       "type": "Subcircuit",
+//       "celltype": "fulladder"
+//     },
+//     "dev6": {
+//       "label": "$genblock$tests/serialadder.sv:47$7[3].\\fa",
+//       "type": "Subcircuit",
+//       "celltype": "fulladder"
+//     },
+//     "dev7": {
+//       "type": "BusGroup",
+//       "groups": [
+//         1,
+//         1,
+//         1,
+//         1,
+//         1
+//       ]
+//     },
+//     "dev8": {
+//       "type": "Constant",
+//       "constant": "0"
+//     },
+//     "dev9": {
+//       "type": "BusSlice",
+//       "slice": {
+//         "first": 0,
+//         "count": 1,
+//         "total": 4
+//       }
+//     },
+//     "dev10": {
+//       "type": "BusSlice",
+//       "slice": {
+//         "first": 0,
+//         "count": 1,
+//         "total": 4
+//       }
+//     },
+//     "dev11": {
+//       "type": "BusSlice",
+//       "slice": {
+//         "first": 1,
+//         "count": 1,
+//         "total": 4
+//       }
+//     },
+//     "dev12": {
+//       "type": "BusSlice",
+//       "slice": {
+//         "first": 1,
+//         "count": 1,
+//         "total": 4
+//       }
+//     },
+//     "dev13": {
+//       "type": "BusSlice",
+//       "slice": {
+//         "first": 2,
+//         "count": 1,
+//         "total": 4
+//       }
+//     },
+//     "dev14": {
+//       "type": "BusSlice",
+//       "slice": {
+//         "first": 2,
+//         "count": 1,
+//         "total": 4
+//       }
+//     },
+//     "dev15": {
+//       "type": "BusSlice",
+//       "slice": {
+//         "first": 3,
+//         "count": 1,
+//         "total": 4
+//       }
+//     },
+//     "dev16": {
+//       "type": "BusSlice",
+//       "slice": {
+//         "first": 3,
+//         "count": 1,
+//         "total": 4
+//       }
+//     }
+//   },
+//   "connectors": [
+//     {
+//       "to": {
+//         "id": "dev9",
+//         "port": "in"
+//       },
+//       "from": {
+//         "id": "dev0",
+//         "port": "out"
+//       },
+//       "name": "a"
+//     },
+//     {
+//       "to": {
+//         "id": "dev11",
+//         "port": "in"
+//       },
+//       "from": {
+//         "id": "dev0",
+//         "port": "out"
+//       },
+//       "name": "a"
+//     },
+//     {
+//       "to": {
+//         "id": "dev13",
+//         "port": "in"
+//       },
+//       "from": {
+//         "id": "dev0",
+//         "port": "out"
+//       },
+//       "name": "a"
+//     },
+//     {
+//       "to": {
+//         "id": "dev15",
+//         "port": "in"
+//       },
+//       "from": {
+//         "id": "dev0",
+//         "port": "out"
+//       },
+//       "name": "a"
+//     },
+//     {
+//       "to": {
+//         "id": "dev10",
+//         "port": "in"
+//       },
+//       "from": {
+//         "id": "dev1",
+//         "port": "out"
+//       },
+//       "name": "b"
+//     },
+//     {
+//       "to": {
+//         "id": "dev12",
+//         "port": "in"
+//       },
+//       "from": {
+//         "id": "dev1",
+//         "port": "out"
+//       },
+//       "name": "b"
+//     },
+//     {
+//       "to": {
+//         "id": "dev14",
+//         "port": "in"
+//       },
+//       "from": {
+//         "id": "dev1",
+//         "port": "out"
+//       },
+//       "name": "b"
+//     },
+//     {
+//       "to": {
+//         "id": "dev16",
+//         "port": "in"
+//       },
+//       "from": {
+//         "id": "dev1",
+//         "port": "out"
+//       },
+//       "name": "b"
+//     },
+//     {
+//       "to": {
+//         "id": "dev2",
+//         "port": "in"
+//       },
+//       "from": {
+//         "id": "dev7",
+//         "port": "out"
+//       },
+//       "name": "o"
+//     },
+//     {
+//       "to": {
+//         "id": "dev3",
+//         "port": "a"
+//       },
+//       "from": {
+//         "id": "dev9",
+//         "port": "out"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev3",
+//         "port": "b"
+//       },
+//       "from": {
+//         "id": "dev10",
+//         "port": "out"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev4",
+//         "port": "d"
+//       },
+//       "from": {
+//         "id": "dev3",
+//         "port": "c"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev3",
+//         "port": "d"
+//       },
+//       "from": {
+//         "id": "dev8",
+//         "port": "out"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev7",
+//         "port": "in0"
+//       },
+//       "from": {
+//         "id": "dev3",
+//         "port": "o"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev4",
+//         "port": "a"
+//       },
+//       "from": {
+//         "id": "dev11",
+//         "port": "out"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev4",
+//         "port": "b"
+//       },
+//       "from": {
+//         "id": "dev12",
+//         "port": "out"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev5",
+//         "port": "d"
+//       },
+//       "from": {
+//         "id": "dev4",
+//         "port": "c"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev7",
+//         "port": "in1"
+//       },
+//       "from": {
+//         "id": "dev4",
+//         "port": "o"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev5",
+//         "port": "a"
+//       },
+//       "from": {
+//         "id": "dev13",
+//         "port": "out"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev5",
+//         "port": "b"
+//       },
+//       "from": {
+//         "id": "dev14",
+//         "port": "out"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev6",
+//         "port": "d"
+//       },
+//       "from": {
+//         "id": "dev5",
+//         "port": "c"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev7",
+//         "port": "in2"
+//       },
+//       "from": {
+//         "id": "dev5",
+//         "port": "o"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev6",
+//         "port": "a"
+//       },
+//       "from": {
+//         "id": "dev15",
+//         "port": "out"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev6",
+//         "port": "b"
+//       },
+//       "from": {
+//         "id": "dev16",
+//         "port": "out"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev7",
+//         "port": "in4"
+//       },
+//       "from": {
+//         "id": "dev6",
+//         "port": "c"
+//       }
+//     },
+//     {
+//       "to": {
+//         "id": "dev7",
+//         "port": "in3"
+//       },
+//       "from": {
+//         "id": "dev6",
+//         "port": "o"
+//       }
+//     }
+//   ],
+//   "subcircuits": {
+//     "halfadder": {
+//       "devices": {
+//         "dev0": {
+//           "type": "Input",
+//           "label": "a",
+//           "net": "a",
+//           "order": 0,
+//           "bits": 1
+//         },
+//         "dev1": {
+//           "type": "Input",
+//           "label": "b",
+//           "net": "b",
+//           "order": 1,
+//           "bits": 1
+//         },
+//         "dev2": {
+//           "type": "Output",
+//           "label": "o",
+//           "net": "o",
+//           "order": 2,
+//           "bits": 1
+//         },
+//         "dev3": {
+//           "type": "Output",
+//           "label": "c",
+//           "net": "c",
+//           "order": 3,
+//           "bits": 1
+//         },
+//         "dev4": {
+//           "label": "$and$tests/serialadder.sv:10$2",
+//           "type": "And",
+//           "bits": 1
+//         },
+//         "dev5": {
+//           "label": "$xor$tests/serialadder.sv:9$1",
+//           "type": "Xor",
+//           "bits": 1
+//         }
+//       },
+//       "connectors": [
+//         {
+//           "to": {
+//             "id": "dev4",
+//             "port": "in1"
+//           },
+//           "from": {
+//             "id": "dev0",
+//             "port": "out"
+//           },
+//           "name": "a"
+//         },
+//         {
+//           "to": {
+//             "id": "dev5",
+//             "port": "in1"
+//           },
+//           "from": {
+//             "id": "dev0",
+//             "port": "out"
+//           },
+//           "name": "a"
+//         },
+//         {
+//           "to": {
+//             "id": "dev4",
+//             "port": "in2"
+//           },
+//           "from": {
+//             "id": "dev1",
+//             "port": "out"
+//           },
+//           "name": "b"
+//         },
+//         {
+//           "to": {
+//             "id": "dev5",
+//             "port": "in2"
+//           },
+//           "from": {
+//             "id": "dev1",
+//             "port": "out"
+//           },
+//           "name": "b"
+//         },
+//         {
+//           "to": {
+//             "id": "dev2",
+//             "port": "in"
+//           },
+//           "from": {
+//             "id": "dev5",
+//             "port": "out"
+//           },
+//           "name": "o"
+//         },
+//         {
+//           "to": {
+//             "id": "dev3",
+//             "port": "in"
+//           },
+//           "from": {
+//             "id": "dev4",
+//             "port": "out"
+//           },
+//           "name": "c"
+//         }
+//       ]
+//     },
+//     "fulladder": {
+//       "devices": {
+//         "dev0": {
+//           "type": "Input",
+//           "label": "a",
+//           "net": "a",
+//           "order": 0,
+//           "bits": 1
+//         },
+//         "dev1": {
+//           "type": "Input",
+//           "label": "b",
+//           "net": "b",
+//           "order": 1,
+//           "bits": 1
+//         },
+//         "dev2": {
+//           "type": "Input",
+//           "label": "d",
+//           "net": "d",
+//           "order": 2,
+//           "bits": 1
+//         },
+//         "dev3": {
+//           "type": "Output",
+//           "label": "o",
+//           "net": "o",
+//           "order": 3,
+//           "bits": 1
+//         },
+//         "dev4": {
+//           "type": "Output",
+//           "label": "c",
+//           "net": "c",
+//           "order": 4,
+//           "bits": 1
+//         },
+//         "dev5": {
+//           "label": "$or$tests/serialadder.sv:28$3",
+//           "type": "Or",
+//           "bits": 1
+//         },
+//         "dev6": {
+//           "label": "ha1",
+//           "type": "Subcircuit",
+//           "celltype": "halfadder"
+//         },
+//         "dev7": {
+//           "label": "ha2",
+//           "type": "Subcircuit",
+//           "celltype": "halfadder"
+//         }
+//       },
+//       "connectors": [
+//         {
+//           "to": {
+//             "id": "dev6",
+//             "port": "a"
+//           },
+//           "from": {
+//             "id": "dev0",
+//             "port": "out"
+//           },
+//           "name": "a"
+//         },
+//         {
+//           "to": {
+//             "id": "dev6",
+//             "port": "b"
+//           },
+//           "from": {
+//             "id": "dev1",
+//             "port": "out"
+//           },
+//           "name": "b"
+//         },
+//         {
+//           "to": {
+//             "id": "dev7",
+//             "port": "b"
+//           },
+//           "from": {
+//             "id": "dev2",
+//             "port": "out"
+//           },
+//           "name": "d"
+//         },
+//         {
+//           "to": {
+//             "id": "dev3",
+//             "port": "in"
+//           },
+//           "from": {
+//             "id": "dev7",
+//             "port": "o"
+//           },
+//           "name": "o"
+//         },
+//         {
+//           "to": {
+//             "id": "dev4",
+//             "port": "in"
+//           },
+//           "from": {
+//             "id": "dev5",
+//             "port": "out"
+//           },
+//           "name": "c"
+//         },
+//         {
+//           "to": {
+//             "id": "dev5",
+//             "port": "in1"
+//           },
+//           "from": {
+//             "id": "dev6",
+//             "port": "c"
+//           },
+//           "name": "c1"
+//         },
+//         {
+//           "to": {
+//             "id": "dev5",
+//             "port": "in2"
+//           },
+//           "from": {
+//             "id": "dev7",
+//             "port": "c"
+//           },
+//           "name": "c2"
+//         },
+//         {
+//           "to": {
+//             "id": "dev7",
+//             "port": "a"
+//           },
+//           "from": {
+//             "id": "dev6",
+//             "port": "o"
+//           },
+//           "name": "t"
+//         }
+//       ]
+//     }
+//   }
+// }
 
-const vda2 = {
+const serialadder = {
   "devices": {
-      "dev0": {
-          "type": "Button",
-          "net": "d",
-          "order": 0,
-          "bits": 1,
-          "label": "d"
-      },
-      "dev1": {
-          "type": "Button",
-          "net": "c",
-          "order": 1,
-          "bits": 1,
-          "label": "c"
-      },
-      "dev2": {
-          "type": "Lamp",
-          "net": "o",
-          "order": 2,
-          "bits": 1,
-          "label": "o"
-      },
-      "dev3": {
-          "label":"$auto$proc_dlatch.cc:409:proc_dlatch$15",
-          "type":"Dff",
-          "bits":1,
-          "polarity": {"enable":true}
+    "dev0": {
+      "type": "NumEntry",
+      "label": "a",
+      "net": "a",
+      "order": 0,
+      "bits": 4
+    },
+    "dev1": {
+      "type": "NumEntry",
+      "label": "b",
+      "net": "b",
+      "order": 1,
+      "bits": 4
+    },
+    "dev2": {
+      "type": "NumDisplay",
+      "label": "o",
+      "net": "o",
+      "order": 2,
+      "bits": 5
+    },
+    "dev3": {
+      "label": "$genblock$tests/serialadder.sv:47$4[0].\\fa",
+      "type": "Subcircuit",
+      "celltype": "fulladder"
+    },
+    "dev4": {
+      "label": "$genblock$tests/serialadder.sv:47$5[1].\\fa",
+      "type": "Subcircuit",
+      "celltype": "fulladder"
+    },
+    "dev5": {
+      "label": "$genblock$tests/serialadder.sv:47$6[2].\\fa",
+      "type": "Subcircuit",
+      "celltype": "fulladder"
+    },
+    "dev6": {
+      "label": "$genblock$tests/serialadder.sv:47$7[3].\\fa",
+      "type": "Subcircuit",
+      "celltype": "fulladder"
+    },
+    "dev7": {
+      "type": "BusGroup",
+      "groups": [
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    },
+    "dev8": {
+      "type": "Constant",
+      "constant": "0"
+    },
+    "dev9": {
+      "type": "BusSlice",
+      "slice": {
+        "first": 0,
+        "count": 1,
+        "total": 4
       }
+    },
+    "dev10": {
+      "type": "BusSlice",
+      "slice": {
+        "first": 0,
+        "count": 1,
+        "total": 4
+      }
+    },
+    "dev11": {
+      "type": "BusSlice",
+      "slice": {
+        "first": 1,
+        "count": 1,
+        "total": 4
+      }
+    },
+    "dev12": {
+      "type": "BusSlice",
+      "slice": {
+        "first": 1,
+        "count": 1,
+        "total": 4
+      }
+    },
+    "dev13": {
+      "type": "BusSlice",
+      "slice": {
+        "first": 2,
+        "count": 1,
+        "total": 4
+      }
+    },
+    "dev14": {
+      "type": "BusSlice",
+      "slice": {
+        "first": 2,
+        "count": 1,
+        "total": 4
+      }
+    },
+    "dev15": {
+      "type": "BusSlice",
+      "slice": {
+        "first": 3,
+        "count": 1,
+        "total": 4
+      }
+    },
+    "dev16": {
+      "type": "BusSlice",
+      "slice": {
+        "first": 3,
+        "count": 1,
+        "total": 4
+      }
+    }
   },
   "connectors": [
-      {"to":{"id":"dev3","port":"in"},"from":{"id":"dev0","port":"out"},"name":"d"},
-      {"to":{"id":"dev3","port":"en"},"from":{"id":"dev1","port":"out"},"name":"c"},
-      {"to":{"id":"dev2","port":"in"},"from":{"id":"dev3","port":"out"},"name":"o"}
+    {
+      "to": {
+        "id": "dev9",
+        "port": "in"
+      },
+      "from": {
+        "id": "dev0",
+        "port": "out"
+      },
+      "name": "a"
+    },
+    {
+      "to": {
+        "id": "dev11",
+        "port": "in"
+      },
+      "from": {
+        "id": "dev0",
+        "port": "out"
+      },
+      "name": "a"
+    },
+    {
+      "to": {
+        "id": "dev13",
+        "port": "in"
+      },
+      "from": {
+        "id": "dev0",
+        "port": "out"
+      },
+      "name": "a"
+    },
+    {
+      "to": {
+        "id": "dev15",
+        "port": "in"
+      },
+      "from": {
+        "id": "dev0",
+        "port": "out"
+      },
+      "name": "a"
+    },
+    {
+      "to": {
+        "id": "dev10",
+        "port": "in"
+      },
+      "from": {
+        "id": "dev1",
+        "port": "out"
+      },
+      "name": "b"
+    },
+    {
+      "to": {
+        "id": "dev12",
+        "port": "in"
+      },
+      "from": {
+        "id": "dev1",
+        "port": "out"
+      },
+      "name": "b"
+    },
+    {
+      "to": {
+        "id": "dev14",
+        "port": "in"
+      },
+      "from": {
+        "id": "dev1",
+        "port": "out"
+      },
+      "name": "b"
+    },
+    {
+      "to": {
+        "id": "dev16",
+        "port": "in"
+      },
+      "from": {
+        "id": "dev1",
+        "port": "out"
+      },
+      "name": "b"
+    },
+    {
+      "to": {
+        "id": "dev2",
+        "port": "in"
+      },
+      "from": {
+        "id": "dev7",
+        "port": "out"
+      },
+      "name": "o"
+    },
+    {
+      "to": {
+        "id": "dev3",
+        "port": "a"
+      },
+      "from": {
+        "id": "dev9",
+        "port": "out"
+      }
+    },
+    {
+      "to": {
+        "id": "dev3",
+        "port": "b"
+      },
+      "from": {
+        "id": "dev10",
+        "port": "out"
+      }
+    },
+    {
+      "to": {
+        "id": "dev4",
+        "port": "d"
+      },
+      "from": {
+        "id": "dev3",
+        "port": "c"
+      }
+    },
+    {
+      "to": {
+        "id": "dev3",
+        "port": "d"
+      },
+      "from": {
+        "id": "dev8",
+        "port": "out"
+      }
+    },
+    {
+      "to": {
+        "id": "dev7",
+        "port": "in0"
+      },
+      "from": {
+        "id": "dev3",
+        "port": "o"
+      }
+    },
+    {
+      "to": {
+        "id": "dev4",
+        "port": "a"
+      },
+      "from": {
+        "id": "dev11",
+        "port": "out"
+      }
+    },
+    {
+      "to": {
+        "id": "dev4",
+        "port": "b"
+      },
+      "from": {
+        "id": "dev12",
+        "port": "out"
+      }
+    },
+    {
+      "to": {
+        "id": "dev5",
+        "port": "d"
+      },
+      "from": {
+        "id": "dev4",
+        "port": "c"
+      }
+    },
+    {
+      "to": {
+        "id": "dev7",
+        "port": "in1"
+      },
+      "from": {
+        "id": "dev4",
+        "port": "o"
+      }
+    },
+    {
+      "to": {
+        "id": "dev5",
+        "port": "a"
+      },
+      "from": {
+        "id": "dev13",
+        "port": "out"
+      }
+    },
+    {
+      "to": {
+        "id": "dev5",
+        "port": "b"
+      },
+      "from": {
+        "id": "dev14",
+        "port": "out"
+      }
+    },
+    {
+      "to": {
+        "id": "dev6",
+        "port": "d"
+      },
+      "from": {
+        "id": "dev5",
+        "port": "c"
+      }
+    },
+    {
+      "to": {
+        "id": "dev7",
+        "port": "in2"
+      },
+      "from": {
+        "id": "dev5",
+        "port": "o"
+      }
+    },
+    {
+      "to": {
+        "id": "dev6",
+        "port": "a"
+      },
+      "from": {
+        "id": "dev15",
+        "port": "out"
+      }
+    },
+    {
+      "to": {
+        "id": "dev6",
+        "port": "b"
+      },
+      "from": {
+        "id": "dev16",
+        "port": "out"
+      }
+    },
+    {
+      "to": {
+        "id": "dev7",
+        "port": "in4"
+      },
+      "from": {
+        "id": "dev6",
+        "port": "c"
+      }
+    },
+    {
+      "to": {
+        "id": "dev7",
+        "port": "in3"
+      },
+      "from": {
+        "id": "dev6",
+        "port": "o"
+      }
+    }
   ],
-  "subcircuits": {}
+  "subcircuits": {
+    "halfadder": {
+      "devices": {
+        "dev0": {
+          "type": "Input",
+          "label": "a",
+          "net": "a",
+          "order": 0,
+          "bits": 1
+        },
+        "dev1": {
+          "type": "Input",
+          "label": "b",
+          "net": "b",
+          "order": 1,
+          "bits": 1
+        },
+        "dev2": {
+          "type": "Output",
+          "label": "o",
+          "net": "o",
+          "order": 2,
+          "bits": 1
+        },
+        "dev3": {
+          "type": "Output",
+          "label": "c",
+          "net": "c",
+          "order": 3,
+          "bits": 1
+        },
+        "dev4": {
+          "label": "$and$tests/serialadder.sv:10$2",
+          "type": "And",
+          "bits": 1
+        },
+        "dev5": {
+          "label": "$xor$tests/serialadder.sv:9$1",
+          "type": "Xor",
+          "bits": 1
+        }
+      },
+      "connectors": [
+        {
+          "to": {
+            "id": "dev4",
+            "port": "in1"
+          },
+          "from": {
+            "id": "dev0",
+            "port": "out"
+          },
+          "name": "a"
+        },
+        {
+          "to": {
+            "id": "dev5",
+            "port": "in1"
+          },
+          "from": {
+            "id": "dev0",
+            "port": "out"
+          },
+          "name": "a"
+        },
+        {
+          "to": {
+            "id": "dev4",
+            "port": "in2"
+          },
+          "from": {
+            "id": "dev1",
+            "port": "out"
+          },
+          "name": "b"
+        },
+        {
+          "to": {
+            "id": "dev5",
+            "port": "in2"
+          },
+          "from": {
+            "id": "dev1",
+            "port": "out"
+          },
+          "name": "b"
+        },
+        {
+          "to": {
+            "id": "dev2",
+            "port": "in"
+          },
+          "from": {
+            "id": "dev5",
+            "port": "out"
+          },
+          "name": "o"
+        },
+        {
+          "to": {
+            "id": "dev3",
+            "port": "in"
+          },
+          "from": {
+            "id": "dev4",
+            "port": "out"
+          },
+          "name": "c"
+        }
+      ]
+    },
+    "fulladder": {
+      "devices": {
+        "dev0": {
+          "type": "Input",
+          "label": "a",
+          "net": "a",
+          "order": 0,
+          "bits": 1
+        },
+        "dev1": {
+          "type": "Input",
+          "label": "b",
+          "net": "b",
+          "order": 1,
+          "bits": 1
+        },
+        "dev2": {
+          "type": "Input",
+          "label": "d",
+          "net": "d",
+          "order": 2,
+          "bits": 1
+        },
+        "dev3": {
+          "type": "Output",
+          "label": "o",
+          "net": "o",
+          "order": 3,
+          "bits": 1
+        },
+        "dev4": {
+          "type": "Output",
+          "label": "c",
+          "net": "c",
+          "order": 4,
+          "bits": 1
+        },
+        "dev5": {
+          "label": "$or$tests/serialadder.sv:28$3",
+          "type": "Or",
+          "bits": 1
+        },
+        "dev6": {
+          "label": "ha1",
+          "type": "Subcircuit",
+          "celltype": "halfadder"
+        },
+        "dev7": {
+          "label": "ha2",
+          "type": "Subcircuit",
+          "celltype": "halfadder"
+        }
+      },
+      "connectors": [
+        {
+          "to": {
+            "id": "dev6",
+            "port": "a"
+          },
+          "from": {
+            "id": "dev0",
+            "port": "out"
+          },
+          "name": "a"
+        },
+        {
+          "to": {
+            "id": "dev6",
+            "port": "b"
+          },
+          "from": {
+            "id": "dev1",
+            "port": "out"
+          },
+          "name": "b"
+        },
+        {
+          "to": {
+            "id": "dev7",
+            "port": "b"
+          },
+          "from": {
+            "id": "dev2",
+            "port": "out"
+          },
+          "name": "d"
+        },
+        {
+          "to": {
+            "id": "dev3",
+            "port": "in"
+          },
+          "from": {
+            "id": "dev7",
+            "port": "o"
+          },
+          "name": "o"
+        },
+        {
+          "to": {
+            "id": "dev4",
+            "port": "in"
+          },
+          "from": {
+            "id": "dev5",
+            "port": "out"
+          },
+          "name": "c"
+        },
+        {
+          "to": {
+            "id": "dev5",
+            "port": "in1"
+          },
+          "from": {
+            "id": "dev6",
+            "port": "c"
+          },
+          "name": "c1"
+        },
+        {
+          "to": {
+            "id": "dev5",
+            "port": "in2"
+          },
+          "from": {
+            "id": "dev7",
+            "port": "c"
+          },
+          "name": "c2"
+        },
+        {
+          "to": {
+            "id": "dev7",
+            "port": "a"
+          },
+          "from": {
+            "id": "dev6",
+            "port": "o"
+          },
+          "name": "t"
+        }
+      ]
+    }
+  }
 }
 
 
 
-const defaultCircuitConfig = {
-  devices: {
-    dev0: {
-      type: "Clock",
-      label: "clk",
-      net: "clk",
-      order: 0,
-      bits: 1,
-      propagation: 100,
-    },
-    dev1: {
-      type: "NumEntry",
-      label: "addr",
-      net: "addr",
-      order: 1,
-      bits: 5,
-    },
-    dev2: {
-      type: "NumDisplay",
-      label: "data",
-      net: "data",
-      order: 2,
-      bits: 4,
-    },
-    dev3: {
-      type: "NumEntry",
-      label: "wraddr",
-      net: "wraddr",
-      order: 3,
-      bits: 5,
-    },
-    dev4: {
-      type: "NumEntry",
-      label: "wrdata",
-      net: "wrdata",
-      order: 4,
-      bits: 4,
-    },
-    dev5: {
-      label: "mem",
-      type: "Memory",
-      bits: 4,
-      abits: 5,
-      words: 16,
-      offset: 0,
-      rdports: [{}],
-      wrports: [{ clock_polarity: true }],
-      memdata: [
-        "0000", "0001", "0010", "0011",
-        "0100", "0101", "0110", "0111",
-        "1000", "1001", "1010", "1011",
-        "1100", "1101", "1110", "1111",
-      ],
-    },
-  },
-  connectors: [
-    {
-      to: { id: "dev5", port: "wr0clk" },
-      from: { id: "dev0", port: "out" },
-      name: "clk",
-    },
-    {
-      to: { id: "dev5", port: "rd0addr" },
-      from: { id: "dev1", port: "out" },
-      name: "addr",
-    },
-    {
-      to: { id: "dev2", port: "in" },
-      from: { id: "dev5", port: "rd0data" },
-      name: "data",
-    },
-    {
-      to: { id: "dev5", port: "wr0addr" },
-      from: { id: "dev3", port: "out" },
-      name: "wraddr",
-    },
-    {
-      to: { id: "dev5", port: "wr0data" },
-      from: { id: "dev4", port: "out" },
-      name: "wrdata",
-    },
-  ],
-  subcircuits: {},
-};
 
 function App() {
   const [theme, setTheme] = useState('light');
-  const [circuitConfig, setCircuitConfig] = useState(vda2);
+  const [circuitConfig, setCircuitConfig] = useState(serialadder);
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
